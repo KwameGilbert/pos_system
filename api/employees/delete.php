@@ -22,5 +22,4 @@ $employee->id = isset($_GET['id']) ? $_GET['id'] : die();
         http_response_code(503);
         echo json_encode(array("message" => "Unable to delete employee."));
     }
-
 ?>
