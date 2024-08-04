@@ -28,19 +28,13 @@ $id = isset($request_uri[1]) ? $request_uri[1] : null;
 // Route the request
 switch ($endpoint) {
     case 'employees':
-        include 'employees/index.php';
-        break;
     case 'inventory':
-        include 'inventory/index.php';
-        break;
     case 'invoices':
-        include 'invoices/index.php';
-        break;
     case 'invoice_items':
-        include 'invoice_items/index.php';
-        break;
     case 'suppliers':
-        include 'suppliers/index.php';
+        // Include the resource-specific index.php
+        $_GET['id'] = $id; // Pass the ID to the resource-specific script
+        include $endpoint.'/index.php';
         break;
     default:
         // Set response code - 404 Not Found

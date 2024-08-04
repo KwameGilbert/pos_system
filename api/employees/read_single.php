@@ -16,7 +16,6 @@ $employee = new Employee($db);
 // Get the ID of the employee to be read
 $employee->id = isset($_GET['id']) ? $_GET['id'] : die();
 
-
 // Read the details of the employee
 $employee->readSingle();
 
