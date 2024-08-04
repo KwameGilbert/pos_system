@@ -1,7 +1,14 @@
 <?php
+// Parse the request URI
+$request_uri = explode('/', trim($_SERVER['REQUEST_URI'], '/'));
+$endpoint = isset($request_uri[0]) ? $request_uri[0] : '';
+$id = isset($request_uri[1]) ? $request_uri[1] : null;
+
+$request_method = $_SERVER['REQUEST_METHOD'];
+
 switch ($request_method) {
     case 'GET':
-        if ($id) {
+        if (isset($id)) {
             include 'read_single.php';
         } else {
             include 'read.php';
@@ -14,7 +21,9 @@ switch ($request_method) {
         include 'update.php';
         break;
     case 'DELETE':
-        include 'delete.php';
+        if ($id) {
+            include 'delete.php';
+        } 
         break;
     default:
         // Set response code - 405 Method Not Allowed
