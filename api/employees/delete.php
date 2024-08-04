@@ -13,10 +13,7 @@ $db = $database->getConnection();
 
 $employee = new Employee($db);
 
-$data = json_decode(file_get_contents("php://input"));
-
-if (!empty($data->id)) {
-    $employee->id = $data->id;
+$employee->id = isset($_GET['id']) ? $_GET['id'] : die();
 
     if ($employee->delete()) {
         http_response_code(200);
@@ -25,8 +22,5 @@ if (!empty($data->id)) {
         http_response_code(503);
         echo json_encode(array("message" => "Unable to delete employee."));
     }
-} else {
-    http_response_code(400);
-    echo json_encode(array("message" => "Unable to delete employee. Data is incomplete."));
-}
+
 ?>
